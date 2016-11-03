@@ -10,3 +10,20 @@
     Posted by <%= link_to @post.username, @post.user_link %> (<%= @post.user_reputation %>)
   </div>
 </div>
+
+<br/>
+
+<% if user_signed_in? && current_user.has_role?(:admin) %>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Admin tools</h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li><%= link_to "Edit", url_for(:controller => :posts, :action => :edit, :id => @post.id) %></li>
+        <li><%= link_to "Delete", url_for(:controller => :posts, :action => :destroy, :id => @post.id), :method => :delete,
+                :class => "text-danger", :data => { :confirm => "Are you sure? This can't be undone." } %></li>
+      </ul>
+    </div>
+  </div>
+<% end %>
