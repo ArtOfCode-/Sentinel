@@ -1,0 +1,12 @@
+<h3><%= link_to @post.title, @post.link %></h3>
+<p><strong>Detection score: </strong><%= @post.nato_score %></p>
+<pre><code><%= @post.body %></code></pre>
+<div class="post-details clearfix">
+  <div class="meta-details pull-left text-left">
+    Posted <%= time_ago_in_words(@post.post_creation_date) %> ago |
+    reported <%= time_ago_in_words(@post.created_at) %> ago
+  </div>
+  <div class="user-details pull-right text-right">
+    Posted by <%= link_to @post.username, @post.user_link %> (<%= @post.user_reputation %>)
+  </div>
+</div>
