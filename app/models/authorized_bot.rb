@@ -1,0 +1,2 @@
+class AuthorizedBot < ApplicationRecord
+end
