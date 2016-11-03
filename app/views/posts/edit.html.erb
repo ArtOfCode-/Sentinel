@@ -1,0 +1,53 @@
+<h3>Edit: <%= @post.title %></h3>
+
+<% if @post.errors.any? %>
+  <div class="text-danger">
+    <p>The following <%= pluralize(@post.errors.count, "error") %> prevented your edit from being saved:</p>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @post, url: url_for(:controller => :posts, :action => :update, :id => @post.id) do |f| %>
+  <div class="field">
+    <%= f.label :title %><br/>
+    <%= f.text_field :title, :class => "form-control" %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :body %><br/>
+    <%= f.text_area :body, { :rows => 7, :class => "form-control" } %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :link %><br/>
+    <%= f.text_field :link, :class => "form-control" %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :user_link %><br/>
+    <%= f.text_field :user_link, :class => "form-control" %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :username %><br/>
+    <%= f.text_field :username, :class => "form-control" %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :user_reputation %><br/>
+    <%= f.number_field :user_reputation, :class => "form-control" %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :nato_score, "NATOBot score" %><br/>
+    <%= f.number_field :nato_score, :class => "form-control" %>
+  </div><br/>
+
+  <div class="actions">
+    <%= f.submit "Save", :class => "btn btn-success" %>
+  </div>
+<% end %>
