@@ -13,6 +13,15 @@
 
 <br/>
 
+<p>Caught by <%= pluralize(@post.reasons.count, "reason") %>:</p>
+<ul class="post-reasons">
+  <% @post.reasons.each do |reason| %>
+    <li><%= link_to reason.name, url_for(:controller => :reasons, :action => :show, :id => reason.id) %></li>
+  <% end %>
+</ul>
+
+<br/>
+
 <% if user_signed_in? && current_user.has_role?(:admin) %>
   <div class="panel panel-info">
     <div class="panel-heading">
