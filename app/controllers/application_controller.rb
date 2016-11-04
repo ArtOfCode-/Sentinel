@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
 
   protected
   def verify_bot_authorized
-    unless AuthorizedBot.find_by_key(params[:authorization]).exists?
-      render :plain => "YOU SHALL NOT PASS!"
+    unless AuthorizedBot.find_by_key(params[:authorization]).present?
+      render :plain => "YOU SHALL NOT PASS!", :status => 403
     end
   end
 
