@@ -1,5 +1,7 @@
 class ReasonsController < ApplicationController
   before_action :set_reason, :except => [:index]
+  before_action :authenticate_user!, :only => [:edit, :update, :destroy]
+  before_action :verify_admin, :only => [:edit, :update, :destroy]
 
   def index
     @reasons = Reason.all.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 50)
