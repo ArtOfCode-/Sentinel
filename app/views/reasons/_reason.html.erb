@@ -1,0 +1,8 @@
+<div class="reason clearfix">
+  <div class="reason-name pull-left text-left">
+    <%= link_to reason.name, url_for(:controller => :reasons, :action => :show, :id => reason.id) %>
+  </div>
+  <div class="reason-meta pull-right text-right">
+    <%= pluralize(reason.posts.count, "post") %>
+  </div>
+</div>

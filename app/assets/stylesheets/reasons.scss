@@ -1,3 +1,15 @@
 // Place all the styles related to the Reasons controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.reason {
+  border-bottom: 1px solid lightgray;
+  padding: 10px;
+}
+
+.reason:hover {
+  border-bottom: 1px solid lightgray;
+  padding: 10px;
+  background: #fbfbfb;
+}
+

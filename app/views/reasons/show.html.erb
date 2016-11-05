@@ -1,0 +1,6 @@
+<h3><%= @reason.name %></h3>
+<p><%= pluralize(@reason.posts.count, "post") %> caught:</p>
+
+<% @reasons.posts.each do |post| %>
+  <%= render 'posts/post', :post => post %>
+<% end %>
