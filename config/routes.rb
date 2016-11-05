@@ -15,4 +15,8 @@ Rails.application.routes.draw do
   get    'reasons/:id/edit',                                             :to => 'reasons#edit'
   patch  'reasons/:id/edit',                                             :to => 'reasons#update'
   delete 'reasons/:id',                                                  :to => 'reasons#destroy'
+
+  get    'users',                                                        :to => 'users#index'
+  post   'users/:id/promote',                                            :to => 'users#promote'
+  post   'users/:id/demote',                                             :to => 'users#demote'
 end
