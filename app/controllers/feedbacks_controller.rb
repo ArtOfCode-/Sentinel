@@ -8,6 +8,7 @@ class FeedbacksController < ApplicationController
     @feedback.feedback_type = FeedbackType.find_by_short_code(params[:feedback_type])
     if @feedback.save
       Rails.cache.delete("post_#{@feedback.post.id}_majority_feedback")
+      Feedback.where(:chat_id => @feedback.chat_id, :post_id => @feedback.post_id).where.not(:id => @feedback.id).destroy_all
       render :create, :formats => :json
     else
       render :json => { :status => "E:FEEDBACK_FAILED_TO_SAVE", :code => "500.1" }, :status => 500
