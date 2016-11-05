@@ -25,7 +25,7 @@ class PostsController < ApplicationController
           Rails.cache.delete("reason_#{reason.id}_most_recent")
         end
 
-        render :json => { :status => "S:COMPLETE", :code => "200" }, :status => 200
+        render :create, :formats => :json
       else
         render :json => { :status => "E:POST_FAILED_TO_SAVE", :code => "500.3" }, :status => 500
       end
