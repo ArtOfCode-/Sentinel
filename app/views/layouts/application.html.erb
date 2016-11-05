@@ -43,6 +43,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.username || current_user.email %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+                <% if user_signed_in? && current_user.has_role?(:admin) %>
+                  <li class="divider"></li>
+                  <li><%= link_to "User Data", users_path %></li>
+                  <li><%= link_to "Write Keys", bots_path %></li>
+                <% end %>
               </ul>
             </li>
         <% else %>

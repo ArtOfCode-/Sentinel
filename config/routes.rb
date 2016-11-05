@@ -19,4 +19,9 @@ Rails.application.routes.draw do
   get    'users',                                                        :to => 'users#index'
   post   'users/:id/promote',                                            :to => 'users#promote'
   post   'users/:id/demote',                                             :to => 'users#demote'
+
+  get    'bots',                                                         :to => 'authorized_bots#index'
+  get    'bots/new',                                                     :to => 'authorized_bots#new'
+  post   'bots/new',                                                     :to => 'authorized_bots#create'
+  delete 'bots/:id',                                                     :to => 'authorized_bots#destroy'
 end
