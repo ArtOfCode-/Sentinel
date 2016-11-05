@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105135703) do
+ActiveRecord::Schema.define(version: 20161105141451) do
 
   create_table "authorized_bots", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20161105135703) do
     t.string   "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "feedback_type_id"
+    t.integer  "chat_id"
+    t.string   "chat_username"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["feedback_type_id"], name: "index_feedbacks_on_feedback_type_id"
+    t.index ["post_id"], name: "index_feedbacks_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
