@@ -8,6 +8,7 @@ class ReasonsController < ApplicationController
   end
 
   def show
+    @feedback_counts = FeedbackType.all.map{|ft| [ft.short_code, ft.posts.joins(:posts_reasons).where(:posts_reasons => { :reason_id => 51 }).count] }
   end
 
   def edit
