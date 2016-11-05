@@ -21,6 +21,11 @@ class PostsController < ApplicationController
         end
       end
       if @post.save
+        # Expire the cached Reason#most_recent values explicitly so that they update immediately
+        @post.reasons.each do |reason|
+          Rails.cache.delete("reason_#{reason.id}_most_recent")
+        end
+
         render :json => { :status => "S:COMPLETE", :code => "200" }, :status => 200
       else
         render :json => { :status => "E:POST_FAILED_TO_SAVE", :code => "500.3" }, :status => 500
