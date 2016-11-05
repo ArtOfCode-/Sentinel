@@ -1,5 +1,12 @@
 <h3>Reported Posts</h3>
-<p>Ordered by: newest first</p>
+<p>Ordered by <%= params[:sort] %></p>
+
+<%= form_tag url_for(:controller => :posts, :action => :index), :method => :get do %>
+  <%= label_tag 'sort', 'Sort by' %>
+  <%= select_tag 'sort', options_for_select([['NATO score', 'nato_score desc'], ['Creation date', 'created_at desc'],
+                                             ['User reputation', 'user_reputation desc']]) %>
+  <%= submit_tag "Go", :class => "btn btn-default" %>
+<% end %>
 
 <% @posts.each do |post| %>
   <%= render 'posts/post', :post => post %>
