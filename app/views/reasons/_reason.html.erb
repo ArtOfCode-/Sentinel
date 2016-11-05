@@ -3,7 +3,6 @@
     <%= link_to reason.name, url_for(:controller => :reasons, :action => :show, :id => reason.id) %>
   </div>
   <div class="reason-meta pull-right text-right">
-    <%= pluralize(reason.posts.count, "post") %> |
-    last used <%= time_ago_in_words(reason.most_recent.created_at) %> ago
+    <strong><%= reason.posts.count %></strong> <%= "post".pluralize(reason.posts.count) %>
   </div>
 </div>

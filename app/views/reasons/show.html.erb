@@ -1,5 +1,5 @@
 <h3><%= @reason.name %></h3>
-<p><%= pluralize(@reason.posts.count, "post") %> caught:</p>
+<p><%= pluralize(@reason.posts.count, "post") %> caught, most recent <%= time_ago_in_words(@reason.most_recent.created_at) %> ago</p>
 
 <% @reason.posts.order(:created_at => :desc).each do |post| %>
   <%= render 'posts/post', :post => post %>
