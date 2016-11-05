@@ -14,7 +14,6 @@ class FeedbacksController < ApplicationController
   end
 
   def post
-
   end
 
   private
