@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  post: one
+  feedback_type: one
+  chat_id: 1
+  chat_username: MyString
+
+two:
+  post: two
+  feedback_type: two
+  chat_id: 1
+  chat_username: MyString

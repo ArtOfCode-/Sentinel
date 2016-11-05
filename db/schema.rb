@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103202812) do
+ActiveRecord::Schema.define(version: 20161105135703) do
 
   create_table "authorized_bots", force: :cascade do |t|
     t.string   "name"
     t.string   "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feedback_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_code"
+    t.string   "character"
+    t.string   "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
