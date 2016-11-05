@@ -1,0 +1,28 @@
+<h3>Authorized NATO bots</h3>
+<p>This lists all the keys registered for bot-write access to Sentinel resources. Ideally, you should assign one key per
+  bot/program that writes to Sentinel, so that if one program is accidentally or purposefully compromised, its key can
+  be revoked without affecting other operational bots.</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Key</th>
+      <th>Registered</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bots.each do |bot| %>
+      <tr>
+        <td><%= bot.name %></td>
+        <td><%= bot.key %></td>
+        <td><%= time_ago_in_words(bot.created_at) %> ago</td>
+        <td><%= link_to "Revoke", url_for(:controller => :authorized_bots, :action => :destroy, :id => bot.id), :class => "text-danger",
+                                  :method => :delete, :data => { :confirm => "Revoke write access for #{bot.name}?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Create a new key", url_for(:controller => :authorized_bots, :action => :new) %>

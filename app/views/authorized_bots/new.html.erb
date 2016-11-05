@@ -1,0 +1,19 @@
+<h3>New write key</h3>
+<p>This creates a new key that grants bot-write access to Sentinel resources. The key is pre-set for you for security;
+  you can use another if you wish, but make sure it's a secure 64-character key.</p>
+
+<%= form_for @bot, url: url_for(:controller => :authorized_bots, :action => :create) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br/>
+    <%= f.text_field :name, :class => "form-control" %>
+  </div><br/>
+
+  <div class="field">
+    <%= f.label :key %><br/>
+    <%= f.text_field :key, :class => "form-control" %>
+  </div><br/>
+
+  <div class="actions">
+    <%= f.submit "Create", :class => "btn btn-primary" %>
+  </div>
+<% end %>
