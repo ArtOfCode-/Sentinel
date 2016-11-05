@@ -1,5 +1,5 @@
 <h3>Reported Posts</h3>
-<p>Ordered by <%= params[:sort] %></p>
+<p>Ordered by <%= params[:sort] || 'created_at desc' %></p>
 
 <%= form_tag url_for(:controller => :posts, :action => :index), :method => :get do %>
   <%= label_tag 'sort', 'Sort by' %>
