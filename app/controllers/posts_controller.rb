@@ -15,7 +15,6 @@ class PostsController < ApplicationController
       params[:reasons].each do |reason|
         @reason = Reason.find_or_create_by(name: reason)
         @reason.posts << @post
-        @post.reasons << @reason
         unless @reason.save
           render :json => { :status => "E:REASON_FAILED_TO_SAVE", :code => "500.2" }, :status => 500
         end
