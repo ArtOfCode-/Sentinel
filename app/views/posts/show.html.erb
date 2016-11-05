@@ -1,6 +1,8 @@
 <h3>
   <%= link_to @post.title, @post.link %>
-  <%= render 'feedbacks/feedback', :type => @post.majority_feedback, :post => @post %>
+  <% if @post.majority_feedback %>
+    <%= render 'feedbacks/feedback', :type => @post.majority_feedback, :post => @post %>
+  <% end %>
 </h3>
 <p><strong>Detection score: </strong><%= @post.nato_score %></p>
 <pre><code><%= @post.body %></code></pre>
