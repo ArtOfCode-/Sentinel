@@ -1,0 +1,23 @@
+<h3>Post Feedback</h3>
+<p>Feedback on: <%= link_to @post.title, url_for(:controller => :posts, :action => :show, :id => @post.id) %></p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Owner</th>
+      <th>Type</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @post.feedbacks each do |feedback| %>
+      <tr>
+        <td><%= feedback.id %></td>
+        <td><%= link_to feedback.chat_username, "http://chat.stackoverflow.com/users/#{feedback.chat_id}" %></td>
+        <td><%= feedback.feedback_type.name %></td>
+        <td><%= time_ago_in_words(feedback.created_at) %> ago</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
