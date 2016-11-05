@@ -1,0 +1,36 @@
+<h3>Sentinel Users</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Joined</th>
+      <th>Role</th>
+      <% if user_signed_in? && current_user.has_role?(:admin) %>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.username %></td>
+        <td><%= time_ago_in_words(user.created_at) %> ago</td>
+        <td><%= user.has_role?(:admin) ? "Admin" : "Regular" %></td>
+        <% if user_signed_in? && current_user.has_role?(:admin) %>
+          <td>
+            <% if user.has_role?(:admin) %>
+              <%= link_to "Demote", url_for(:controller => :users, :action => :demote, :id => user.id), :class => "text-danger",
+                          :method => :post, :data => { :confirm => "Remove admin rights from #{user.username}?" } %>
+            <% else %>
+              <%= link_to "Promote", url_for(:controller => :users, :action => :promote, :id => user.id), :class => "text-danger",
+                          :method => :post, :data => { :confirm => "Promote #{user.username} to admin?" } %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
