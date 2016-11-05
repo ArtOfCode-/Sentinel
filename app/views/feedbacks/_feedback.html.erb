@@ -1,1 +1,8 @@
-<span class="feedback" style="color:<%= type.color %>;" title="<%= type.name %> (<%= type.short_code %>)"><%= type.character %></span>
+<span class="feedback" style="color:<%= type.color %>;" title="<%= type.name %> (<%= type.short_code %>)">
+  <%= type.character %>
+  <%= link_to url_for(:controller => :feedbacks, :action => :post, :id => post.id) do %>
+    <span class="badge" title="<%= post.feedbacks.count %> more <%= "feedback".pluralize(post.feedbacks.count) %>">
+      +<%= post.feedbacks.count %>
+    </span>
+  <% end %>
+</span>

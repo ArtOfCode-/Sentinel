@@ -11,11 +11,11 @@
     </tr>
   </thead>
   <tbody>
-    <% @post.feedbacks each do |feedback| %>
+    <% @post.feedbacks.each do |feedback| %>
       <tr>
         <td><%= feedback.id %></td>
         <td><%= link_to feedback.chat_username, "http://chat.stackoverflow.com/users/#{feedback.chat_id}" %></td>
-        <td><%= feedback.feedback_type.name %></td>
+        <td style="color:<%= feedback.feedback_type.color %>;"><%= feedback.feedback_type.name %></td>
         <td><%= time_ago_in_words(feedback.created_at) %> ago</td>
       </tr>
     <% end %>

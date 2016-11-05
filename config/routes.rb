@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get    'posts/:id/edit',                                               :to => 'posts#edit'
   patch  'posts/:id/edit',                                               :to => 'posts#update'
   delete 'posts/:id',                                                    :to => 'posts#destroy'
+  get    'posts/:id/feedback',                                           :to => 'feedbacks#post'
 
   get    'reasons',                                                      :to => 'reasons#index'
   get    'reasons/:id',                                                  :to => 'reasons#show'
@@ -24,4 +25,6 @@ Rails.application.routes.draw do
   get    'bots/new',                                                     :to => 'authorized_bots#new'
   post   'bots/new',                                                     :to => 'authorized_bots#create'
   delete 'bots/:id',                                                     :to => 'authorized_bots#destroy'
+
+  post   'feedbacks/new',                                                :to => 'feedbacks#create'
 end
