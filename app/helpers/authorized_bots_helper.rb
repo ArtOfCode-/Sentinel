@@ -1,0 +1,2 @@
+module AuthorizedBotsHelper
+end
