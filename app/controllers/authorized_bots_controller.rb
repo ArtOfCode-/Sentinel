@@ -9,6 +9,7 @@ class AuthorizedBotsController < ApplicationController
 
   def new
     @bot = AuthorizedBot.new
+    @bot.key = Digest::SHA256.hexdigest("#{Time.now}#{rand(0..9e9)}")
   end
 
   def create
@@ -32,5 +33,9 @@ class AuthorizedBotsController < ApplicationController
   private
   def set_bot
     @bot = AuthorizedBot.find params[:id]
+  end
+
+  def bot_params
+    params.require(:authorized_bot).permit(:name, :key)
   end
 end
