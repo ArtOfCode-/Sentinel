@@ -15,7 +15,9 @@
       <tr>
         <td><%= feedback.id %></td>
         <td><%= link_to feedback.chat_username, "http://chat.stackoverflow.com/users/#{feedback.chat_id}" %></td>
-        <td style="color:<%= feedback.feedback_type.color %>;"><%= feedback.feedback_type.name %></td>
+        <td style="color:<%= feedback.feedback_type.color %> !important;">
+          <%= link_to feedback.feedback_type.name, url_for(:controller => :posts, :action => :with_feedback, :type => feedback.feedback_type.short_code) %>
+        </td>
         <td><%= time_ago_in_words(feedback.created_at) %> ago</td>
       </tr>
     <% end %>
