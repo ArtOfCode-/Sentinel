@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   has_and_belongs_to_many :reasons
   has_many :feedbacks, dependent: :destroy
+  has_many :feedback_types, through: :feedbacks
 
   validates :title, :presence => true
   validates :body, :presence => true
@@ -12,9 +13,10 @@ class Post < ApplicationRecord
   validates :nato_score, :presence => true, :inclusion => -30..30   # -30..30 as a sanity check rather than a validation
 
   def majority_feedback
-    Rails.cache.fetch "post_#{self.id}_majority_feedback", :expires_in => 1.hour do
-      # Yes, I did use `find_by :id` deliberately - we *want* `nil` if it can't be found.
-      FeedbackType.find_by id: self.feedbacks.joins(:feedback_type).group('feedback_types.id').order('count(feedbacks.id) desc').count.first.try(:[], 0)
-    end
+    feedback_types = self.feedback_types
+
+    # Find the most frequent, from http://stackoverflow.com/a/412177/1849664
+    frequencies = feedback_types.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+    return frequencies.max_by { |v| frequencies[v] }
   end
 end
