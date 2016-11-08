@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   root :to => 'posts#index'
 
   get    'posts',                                                        :to => 'posts#index'
-  get    'posts/:id',                                                    :to => 'posts#show'
   post   'posts/new',                                                    :to => 'posts#create'
+  get    'posts/with_feedback/:type',                                    :to => 'posts#with_feedback'
+  get    'posts/:id',                                                    :to => 'posts#show'
   get    'posts/:id/edit',                                               :to => 'posts#edit'
   patch  'posts/:id/edit',                                               :to => 'posts#update'
   delete 'posts/:id',                                                    :to => 'posts#destroy'

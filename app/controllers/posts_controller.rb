@@ -57,6 +57,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def with_feedback
+    @type = FeedbackType.find_by_short_code params[:type]
+    @posts = @type.posts.paginate(:page => params[:page], :per_page => 100)
+  end
+
   private
   def set_post
     @post = Post.find params[:id]
