@@ -30,4 +30,12 @@ Rails.application.routes.draw do
   post   'feedbacks/new',                                                :to => 'feedbacks#create'
 
   get    'search',                                                       :to => 'search#results'
+
+  get    'apps',                                                         :to => 'api_keys#index'
+  get    'apps/admin',                                                   :to => 'api_keys#admin_list'
+  get    'apps/new',                                                     :to => 'api_keys#new'
+  post   'apps/new',                                                     :to => 'api_keys#create'
+  get    'apps/:id/edit',                                                :to => 'api_keys#edit'
+  patch  'apps/:id/edit',                                                :to => 'api_keys#update'
+  delete 'apps/:id',                                                     :to => 'api_keys#destroy'
 end

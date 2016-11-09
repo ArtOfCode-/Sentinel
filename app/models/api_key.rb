@@ -7,6 +7,7 @@ class ApiKey < ApplicationRecord
 
   private
   def valid_repo_url
+    return true if self.repo.nil? || self.repo.empty?
     parsed = URI.parse(self.repo)
     accepted_hosts = ["github.com", "gitlab.com", "bitbucket.org"]
     if parsed

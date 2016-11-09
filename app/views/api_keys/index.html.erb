@@ -1,0 +1,38 @@
+<h3>Apps</h3>
+<p>What follows is a list of all applications that are registered to use the Sentinel API.</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>App Name</th>
+      <th>Repo URL</th>
+      <th>Owner</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @keys.each do |key| %>
+      <% url = URI.parse(key.repo || "") %>
+      <tr>
+        <td><%= key.name %></td>
+        <td><%= link_to url.host + url.path, key.repo if key.repo && !key.repo.empty? %></td>
+        <td><%= key.user.username %></td>
+        <td>
+          <% if user_signed_in? && (current_user.has_role?(:admin) || current_user == key.user) %>
+            <%= link_to "Edit", url_for(:controller => :api_keys, :action => :edit, :id => key.id) %>
+          <% end %>
+        </td>
+        <td>
+          <% if user_signed_in? && (current_user.has_role?(:admin) || current_user == key.user) %>
+            <%= link_to "Delete", url_for(:controller => :api_keys, :action => :destroy, :id => key.id), :class => 'text-danger',
+                        :method => :delete, :data => { :confirm => "Are you sure? This can't be undone." } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+
+<p><%= link_to "Register a new app", url_for(:controller => :api_keys, :action => :new) %></p>

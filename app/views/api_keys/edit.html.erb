@@ -1,0 +1,40 @@
+<h3>Edit an app</h3>
+
+<% if @key.errors.any? %>
+    <div class="text-danger">
+      <p>The following <%= pluralize(@key.errors.count, "error") %> prevented your app from being updated:</p>
+      <ul>
+        <% @key.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<%= form_for @key, url: url_for(:controller => :api_keys, :action => :update, :id => @key.id) do |f| %>
+    <div class="field">
+      <%= f.label :name %><br/>
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div><br/>
+
+    <div class="field">
+      <%= f.label :key %><br/>
+      <em>Generally, you shouldn't change this - it's pre-set for security. If you know what you're doing, you can change
+        it.</em><br/>
+      <%= f.text_field :key, :class => 'form-control' %>
+    </div><br/>
+
+    <div class="field">
+      <%= f.label :repo %><br/>
+      <em>Optionally, include a link to your GitHub/GitLab/BitBucket repo here.</em><br/>
+      <%= f.text_field :repo, :class => 'form-control' %>
+    </div><br/>
+
+    <div class="field">
+      <p><strong>Owner: </strong><%= current_user.username %></p>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Update', :class => 'btn btn-primary' %>
+    </div>
+<% end %>

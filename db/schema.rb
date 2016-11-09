@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105141451) do
+ActiveRecord::Schema.define(version: 20161109095340) do
+
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "name"
+    t.string   "key"
+    t.string   "repo"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
+  end
 
   create_table "authorized_bots", force: :cascade do |t|
     t.string   "name"
