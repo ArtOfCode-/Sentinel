@@ -38,4 +38,6 @@ Rails.application.routes.draw do
   get    'apps/:id/edit',                                                :to => 'api_keys#edit'
   patch  'apps/:id/edit',                                                :to => 'api_keys#update'
   delete 'apps/:id',                                                     :to => 'api_keys#destroy'
+
+  get    'api/posts/by_url',                                             :to => 'api#posts_by_url'
 end
