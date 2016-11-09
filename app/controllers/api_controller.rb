@@ -21,7 +21,7 @@ class ApiController < ApplicationController
   private
   def verify_api_key
     @key = ApiKey.find_by_key params[:key]
-    unless @key.exists?
+    unless params[:key].present? && @key.present?
       render :invalid_key, :formats => :json
     end
   end
