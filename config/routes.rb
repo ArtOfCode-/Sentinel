@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   delete 'bots/:id',                                                     :to => 'authorized_bots#destroy'
 
   post   'feedbacks/new',                                                :to => 'feedbacks#create'
+
+  get    'search',                                                       :to => 'search#results'
 end

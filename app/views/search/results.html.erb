@@ -1,0 +1,20 @@
+<h3>Search Results</h3>
+
+<%= form_tag url_for(:controller => :search, :action => :results), :method => :get do %>
+  <div class="field input-group">
+    <%= text_field_tag 'q', params[:q], :placeholder => "type your search term here - literal match on title, body, or username", :class => "form-control" %>
+    <span class="input-group-btn">
+      <%= submit_tag 'Search', :class => "btn btn-success" %>
+    </span>
+  </div>
+<% end %>
+
+<br/>
+
+<% @results.each do |post| %>
+  <%= render 'posts/post', :post => post %>
+<% end %>
+
+<div class="text-center">
+  <%= will_paginate @results, :renderer => BootstrapPagination::Rails %>
+</div>
