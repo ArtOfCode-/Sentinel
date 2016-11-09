@@ -22,7 +22,7 @@ class ApiController < ApplicationController
   def verify_api_key
     @key = ApiKey.find_by_key params[:key]
     unless params[:key].present? && @key.present?
-      render :invalid_key, :formats => :json
+      render :invalid_key, :formats => :json, :status => 403
     end
   end
 
