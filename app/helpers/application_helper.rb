@@ -1,5 +1,5 @@
 module ApplicationHelper
   def current_version
-    '0.5.2'
+    '0.6.1'
   end
 end
