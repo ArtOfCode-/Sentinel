@@ -39,5 +39,9 @@ Rails.application.routes.draw do
   patch  'apps/:id/edit',                                                :to => 'api_keys#update'
   delete 'apps/:id',                                                     :to => 'api_keys#destroy'
 
+  get    'analytics',                                                    :to => 'analytics#index'
+  get    'analytics-api/views_by_period',                                :to => 'analytics#pageviews_over_time'
+  get    'analytics-api/views_by_country',                               :to => 'analytics#pageviews_by_country'
+
   get    'api/posts/by_url',                                             :to => 'api#posts_by_url'
 end

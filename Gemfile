@@ -33,6 +33,10 @@ gem 'devise'
 gem 'rolify'
 gem 'will_paginate-bootstrap'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'ahoy_matey'
+#gem 'activeuuid', '>= 0.5.0'
+gem 'groupdate'
+gem 'chartkick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

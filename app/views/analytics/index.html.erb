@@ -1,0 +1,14 @@
+<h3>Analytics</h3>
+<p>Various analytics that sounded useful at the time. Time will tell if they are or not.</p>
+
+<h4>Page views over time</h4>
+<%= line_chart url_for(:controller => :analytics, :action => :pageviews_over_time, :period => params[:pvot_period] || 'day') %>
+<p>
+  <strong>Time period: </strong>
+  <%= link_to "Hour", url_for(:controller => :analytics, :action => :index, :pvot_period => 'hour') %> |
+  <%= link_to "Day", url_for(:controller => :analytics, :action => :index, :pvot_period => 'day') %> |
+  <%= link_to "Week", url_for(:controller => :analytics, :action => :index, :pvot_period => 'week') %>
+</p>
+
+<h4>Page views by country</h4>
+<%= geo_chart url_for(:controller => :analytics, :action => :pageviews_by_country) %>
