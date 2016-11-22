@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118182826) do
+ActiveRecord::Schema.define(version: 20161122225928) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer  "visit_id"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20161118182826) do
     t.string   "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "deletion_logs", force: :cascade do |t|
+    t.integer  "post_id"
+    t.boolean  "is_deleted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_deletion_logs_on_post_id"
   end
 
   create_table "feedback_types", force: :cascade do |t|
@@ -71,6 +79,7 @@ ActiveRecord::Schema.define(version: 20161118182826) do
     t.float    "nato_score"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "answer_id"
   end
 
   create_table "posts_reasons", force: :cascade do |t|
