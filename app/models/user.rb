@@ -12,8 +12,8 @@ class User < ApplicationRecord
 
   def get_access_token(code, host)
     parameters = {
-      :client_id => Rails.application.config.se_client_id,
-      :client_secret => Rails.application.config.se_client_secret,
+      :client_id => AppConfig[:se_client_id],
+      :client_secret => AppConfig[:se_client_secret],
       :code => code,
       :redirect_uri => Rails.application.routes.url_helpers.url_for(:host => host, :controller => :se_auth, :action => :target)
     }

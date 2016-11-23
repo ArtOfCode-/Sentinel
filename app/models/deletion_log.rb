@@ -4,7 +4,7 @@ class DeletionLog < ApplicationRecord
   validates :is_deleted, :presence => true
 
   def self.get_statuses
-    api_key = Rails.application.config.se_api_key
+    api_key = AppConfig[:se_api_key]
 
     eligible = Post.left_joins(:deletion_logs).where(:deletion_logs => { :id => nil }).where('posts.created_at > ?', 2.years.ago)
     logger.debug "[DeletionLog#get_statuses] Counted #{eligible.count} Posts eligible for DL checking."

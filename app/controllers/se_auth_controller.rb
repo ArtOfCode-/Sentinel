@@ -6,7 +6,7 @@ class SeAuthController < ApplicationController
   end
 
   def redirect
-    client_id = Rails.application.config.se_client_id
+    client_id = AppConfig[:se_client_id]
     redirect_uri = url_for(:controller => :se_auth, :action => :target)
     scope = 'no_expiry,write_access'
     auth_state = Digest::SHA256.hexdigest("#{current_user.username}#{rand(0..9e9)}")
