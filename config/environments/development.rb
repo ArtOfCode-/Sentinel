@@ -52,6 +52,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.default_url_options = { :host => 'localhost', :port => 3000 }
+
   config.se_api_key = '2gmzQd)PotUHsQeN02KAng(('
   config.se_client_id = ENV['SE_CLIENT_ID']
   config.se_client_secret = ENV['SE_CLIENT_SECRET']
