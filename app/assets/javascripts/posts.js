@@ -1,8 +1,8 @@
 function createFlagOption(item, handler) {
     var container = $("<div></div>");
     container.addClass("clearfix flag-option");
-    container.append("<div class='pull-left'><input type='radio' name='flag-option' value='" + item['option_id'] + "' data-flagtype='" + item['title'] + "'/></div>");
-    var details = $("<div class='pull-right'></div>");
+    container.append("<div class='pull-left col-sm-1 col-md-1'><input type='radio' name='flag-option' value='" + item['option_id'] + "' data-flagtype='" + item['title'] + "'/></div>");
+    var details = $("<div class='pull-right col-sm-11 col-md-11'></div>");
     details.append("<p><strong>" + item['title'] + "</strong></p>");
     details.append("<p>" +  item['description'] + "</p>");
     container.append(details);
@@ -27,9 +27,6 @@ $(document).ready(function() {
                 if (!items[i]['has_flagged']) {
                     var flagOption = createFlagOption(items[i], function(item) {
                         return function(ev) {
-                            $(".flag-option").css("background", "none");
-                            $(ev.target).css("background", "#ddd");
-
                             if (item['requires_comment']) {
                                 window.flagComment = prompt("Please enter a comment to be sent with this flag:", "");
                             }
@@ -41,15 +38,16 @@ $(document).ready(function() {
             $(".modal").first().modal('show');
         })
         .error(function(xhr, status, error) {
-            sentinel.createNotification('danger', JSON.parse(xhr.responseText)['error_message'], $(this));
+            sentinel.createNotification('danger', JSON.parse(xhr.responseText)['error_message'], $(".post-flag-link"));
         });
     });
 
     $(".cast-flag").on("click", function(ev) {
-        var selected = $("input[name=flag-option]").val();
+        var checkedOption = $("input[name=flag-option]:checked");
+        var selected = checkedOption.val();
         var comment = window.flagComment || null;
         var answerId = $(this).data("answerid");
-        var flagType = $("input[name=flag-option]:selected").data("flagtype");
+        var flagType = checkedOption.data("flagtype");
         $.ajax({
             'type': 'POST',
             'url': '/posts/' + answerId + '/flag',
@@ -60,10 +58,16 @@ $(document).ready(function() {
             }
         })
         .done(function(data) {
-            sentinel.createNotification('success', "Post flagged successfully.", $(this));
+            $(".modal").modal('hide');
+            sentinel.createNotification('success', "Post flagged successfully.", $(".post-flag-link"));
         })
         .error(function(xhr, status, error) {
-            sentinel.createNotification('danger', JSON.parse(xhr.responseText)['error_message'], $(this));
+            $(".modal").modal('hide');
+            sentinel.createNotification('danger', JSON.parse(xhr.responseText)['error_message'], $(".post-flag-link"));
         });
+    });
+
+    $(document).on("hide.bs.modal", function(ev) {
+        $(".modal-body").empty();
     });
 });

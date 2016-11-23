@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, :only => [:edit, :update, :destroy, :flag_options, :cast_flag]
   before_action :verify_admin, :only => [:edit, :update, :destroy]
   before_action :verify_bot_authorized, :only => [:create]
-  before_action :verify_post_eligible, :only => [:flag_options, :cast_flag]
+  before_action :check_can_flag, :only => [:flag_options, :cast_flag]
   skip_before_action :verify_authenticity_token, :only => [:create]
 
   def index
@@ -69,8 +69,14 @@ class PostsController < ApplicationController
   end
 
   def cast_flag
-    response = HTTParty.post(api_url("/answers/#{params[:answer_id]}/flags/add", current_user, { :site => 'stackoverflow' }),
-                             :body => { :option_id => params[:option_id], :comment => params[:comment] })
+    opts = { :option_id => params[:option_id].to_i, :key => AppConfig['se_api_key'], :preview => false,
+             :access_token => current_user.stack_user.access_token, :site => 'stackoverflow', :id => params[:answer_id].to_i }
+
+    if params[:comment].present?
+      opts[:comment] = params[:comment]
+    end
+
+    response = HTTParty.post("https://api.stackexchange.com/2.2/answers/#{params[:answer_id]}/flags/add", :body => opts)
     if response.code == 200
       flag = Flag.new(:post => Post.find_by_answer_id(params[:answer_id]), :user => current_user, :flag_type => params[:flag_type])
       unless flag.save
@@ -92,9 +98,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body, :link, :post_creation_date, :user_link, :username, :user_reputation, :nato_score)
   end
 
-  def verify_post_eligible
-    post = Post.find_by_answer_id params[:answer_id]
-    unless post.majority_feedback.short_code == 'tp'
+  def check_can_flag
+    unless current_user&.stack_user
       render :not_flaggable, :status => 400, :formats => :json
     end
   end
