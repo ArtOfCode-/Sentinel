@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   patch  'posts/:id/edit',                                               :to => 'posts#update'
   delete 'posts/:id',                                                    :to => 'posts#destroy'
   get    'posts/:id/feedback',                                           :to => 'feedbacks#post'
+  get    'posts/:answer_id/flag_options',                                :to => 'posts#flag_options'
+  post   'posts/:answer_id/flag',                                        :to => 'posts#cast_flag'
 
   get    'reasons',                                                      :to => 'reasons#index'
   get    'reasons/:id',                                                  :to => 'reasons#show'
