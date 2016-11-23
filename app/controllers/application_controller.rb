@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def api_url(path, user = nil, params = {})
-    url = "https://api.stackexchange.com/2.2#{path}?key=#{AppConfig[:se_api_key]}"
+    url = "https://api.stackexchange.com/2.2#{path}?key=#{AppConfig['se_api_key']}"
     if user&.stack_user
       url += "&access_token=#{user.stack_user.access_token}"
     end

@@ -1,7 +1,7 @@
 function createFlagOption(item, handler) {
     var container = $("<div></div>");
     container.addClass("clearfix flag-option");
-    container.append("<div class='pull-left'><input type='radio' name='flag-option' value='" + item['option_id'] + "' /></div>");
+    container.append("<div class='pull-left'><input type='radio' name='flag-option' value='" + item['option_id'] + "' data-flagtype='" + item['title'] + "'/></div>");
     var details = $("<div class='pull-right'></div>");
     details.append("<p><strong>" + item['title'] + "</strong></p>");
     details.append("<p>" +  item['description'] + "</p>");
@@ -49,12 +49,14 @@ $(document).ready(function() {
         var selected = $("input[name=flag-option]").val();
         var comment = window.flagComment || null;
         var answerId = $(this).data("answerid");
+        var flagType = $("input[name=flag-option]:selected").data("flagtype");
         $.ajax({
             'type': 'POST',
             'url': '/posts/' + answerId + '/flag',
             'data': {
                 'option_id': selected,
-                'comment': comment
+                'comment': comment,
+                'flag_type': flagType
             }
         })
         .done(function(data) {

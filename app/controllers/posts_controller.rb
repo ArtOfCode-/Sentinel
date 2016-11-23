@@ -64,13 +64,19 @@ class PostsController < ApplicationController
   end
 
   def flag_options
-    response = HTTParty.get(api_url("/answers/#{params[:answer_id]}/flags/options", current_user))
+    response = HTTParty.get(api_url("/answers/#{params[:answer_id]}/flags/options", current_user, { :site => 'stackoverflow' }))
     render :json => response.body, :status => response.code
   end
 
   def cast_flag
-    response = HTTParty.post(api_url("/answers/#{params[:answer_id]}/flags/add", current_user),
+    response = HTTParty.post(api_url("/answers/#{params[:answer_id]}/flags/add", current_user, { :site => 'stackoverflow' }),
                              :body => { :option_id => params[:option_id], :comment => params[:comment] })
+    if response.code == 200
+      flag = Flag.new(:post => Post.find_by_answer_id(params[:answer_id]), :user => current_user, :flag_type => params[:flag_type])
+      unless flag.save
+        render :json => { :error_message => flag.errors.full_messages.map{ |m| m.downcase! }.to_sentence.capitalize }, :status => 500
+      end
+    end
     render :json => response.body, :status => response.code
   end
 
