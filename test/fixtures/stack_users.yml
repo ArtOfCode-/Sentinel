@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  network_id: 1
+  chat_so_id: 1
+  chat_se_id: 1
+  chat_mse_id: 1
+  access_token: MyString
+
+two:
+  user: two
+  network_id: 1
+  chat_so_id: 1
+  chat_se_id: 1
+  chat_mse_id: 1
+  access_token: MyString

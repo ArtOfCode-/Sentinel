@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122225928) do
+ActiveRecord::Schema.define(version: 20161123003059) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer  "visit_id"
@@ -103,6 +103,19 @@ ActiveRecord::Schema.define(version: 20161122225928) do
     t.index ["name"], name: "index_roles_on_name"
   end
 
+  create_table "stack_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "network_id"
+    t.integer  "chat_so_id"
+    t.integer  "chat_se_id"
+    t.integer  "chat_mse_id"
+    t.string   "access_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "username"
+    t.index ["user_id"], name: "index_stack_users_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -117,6 +130,7 @@ ActiveRecord::Schema.define(version: 20161122225928) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "username"
+    t.string   "auth_state"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
