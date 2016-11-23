@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, :only => [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, :only => [:edit, :update, :destroy]
+  before_action :authenticate_user!, :only => [:edit, :update, :destroy, :flag_options, :cast_flag]
   before_action :verify_admin, :only => [:edit, :update, :destroy]
   before_action :verify_bot_authorized, :only => [:create]
+  before_action :verify_post_eligible, :only => [:flag_options, :cast_flag]
   skip_before_action :verify_authenticity_token, :only => [:create]
 
   def index
@@ -63,7 +64,17 @@ class PostsController < ApplicationController
   end
 
   def flag_options
+    response = HTTParty.get(api_url("/answers/#{params[:answer_id]}/flags/options", current_user))
+    render :json => response.body, :status => response.code
+  end
 
+  def cast_flag
+    response = HTTParty.post(api_url("/answers/#{params[:answer_id]}/flags/add", current_user),
+                             :body => { :option_id => params[:option_id], :comment => params[:comment] })
+    render :json => response.body, :status => response.code
+  end
+
+  def not_flaggable
   end
 
   private
@@ -73,5 +84,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :link, :post_creation_date, :user_link, :username, :user_reputation, :nato_score)
+  end
+
+  def verify_post_eligible
+    post = Post.find_by_answer_id params[:answer_id]
+    unless post.majority_feedback.short_code == 'tp'
+      render :not_flaggable, :status => 400
+    end
   end
 end
