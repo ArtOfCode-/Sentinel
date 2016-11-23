@@ -89,7 +89,7 @@ class PostsController < ApplicationController
   def verify_post_eligible
     post = Post.find_by_answer_id params[:answer_id]
     unless post.majority_feedback.short_code == 'tp'
-      render :not_flaggable, :status => 400
+      render :not_flaggable, :status => 400, :formats => :json
     end
   end
 end
