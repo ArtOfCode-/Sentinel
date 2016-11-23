@@ -18,6 +18,20 @@
 
 <br/>
 
+<% if user_signed_in? %>
+  <% if current_user.stack_user.present? %>
+    <p>
+      <a href="#" class="text-danger post-flag-link" data-answerid="<%= @post.answer_id %>"><span class="glyphicon glyphicon-flag"></span> Flag this post</a>
+    </p>
+  <% else %>
+    <p class="text-muted">
+      <span class="glyphicon glyphicon-flag"></span> <%= link_to "Authenticate with Stack Exchange", url_for(:controller => :se_auth, :action => :initiate) %>
+      to flag this post.
+    </p>
+  <% end %>
+  <br/>
+<% end %>
+
 <p><strong>Caught by <%= pluralize(@post.reasons.count, "reason") %>:</strong></p>
 <ul class="post-reasons">
   <% @post.reasons.each do |reason| %>
@@ -41,3 +55,21 @@
     </div>
   </div>
 <% end %>
+
+<div class="modal fade">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">I am flagging to report this answer as...</h4>
+      </div>
+      <div class="modal-body flag-dialog">
+        <div class="clearfix">
+          <div class="pull-right text-right">
+            <button class="btn btn-danger cast-flag" data-answerid="<%= @post.answer_id %>">Flag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
