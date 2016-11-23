@@ -22,7 +22,7 @@ class SeAuthController < ApplicationController
 
   def target
     if current_user.auth_state.present? && current_user.auth_state == params[:state]
-      token = current_user.get_access_token(params[:code], request.host_with_post)
+      token = current_user.get_access_token(params[:code], request.host_with_port)
 
       stack_user = StackUser.new(:user => current_user, :access_token => token)
       if stack_user.save
