@@ -62,6 +62,10 @@ class PostsController < ApplicationController
     @posts = @type.posts.paginate(:page => params[:page], :per_page => 100)
   end
 
+  def flag_options
+
+  end
+
   private
   def set_post
     @post = Post.find params[:id]
