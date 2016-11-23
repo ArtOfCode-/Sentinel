@@ -18,7 +18,7 @@ class User < ApplicationRecord
       :redirect_uri => Rails.application.routes.url_helpers.url_for(:host => host, :controller => :se_auth, :action => :target)
     }
     response = HTTParty.post('https://stackexchange.com/oauth/access_token', :body => parameters)
-    if response.status == 200
+    if response.code == 200
       response.parsed_response['access_token']
     else
       false
