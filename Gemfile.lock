@@ -38,24 +38,10 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.0)
-      public_suffix (~> 2.0, >= 2.0.2)
-    ahoy_matey (1.5.3)
-      addressable
-      browser (~> 2.0)
-      geocoder
-      rack-attack (< 6)
-      railties
-      referer-parser (>= 0.3.0)
-      request_store
-      safely_block (>= 0.1.1)
-      user_agent_parser
-      uuidtools
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (7.1.4)
     bcrypt (3.1.11)
-    browser (2.3.0)
     builder (3.2.2)
     byebug (9.0.6)
     capistrano (3.6.1)
@@ -83,7 +69,6 @@ GEM
       sshkit (>= 1.2.0)
     capistrano-upload-config (0.7.0)
       capistrano (>= 3.0)
-    chartkick (2.0.2)
     chronic (0.10.2)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
@@ -100,15 +85,11 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    errbase (0.0.3)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
-    geocoder (1.4.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    groupdate (3.0.2)
-      activesupport (>= 3)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -142,11 +123,8 @@ GEM
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
-    public_suffix (2.0.4)
     puma (3.6.0)
     rack (2.0.1)
-    rack-attack (5.0.1)
-      rack
     rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -177,13 +155,9 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
-    referer-parser (0.3.0)
-    request_store (1.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rolify (5.1.0)
-    safely_block (0.1.1)
-      errbase
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -217,8 +191,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.3)
       execjs (>= 0.3.0, < 3)
-    user_agent_parser (2.3.0)
-    uuidtools (2.1.5)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.4.0)
@@ -239,7 +211,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ahoy_matey
   byebug
   capistrano
   capistrano-bundler
@@ -249,10 +220,8 @@ DEPENDENCIES
   capistrano-rvm
   capistrano-secrets-yml
   capistrano-upload-config
-  chartkick
   coffee-rails (~> 4.2)
   devise
-  groupdate
   httparty
   jbuilder (~> 2.5)
   jquery-rails

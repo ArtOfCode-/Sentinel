@@ -39,14 +39,5 @@ Rails.application.routes.draw do
   patch  'apps/:id/edit',                                                :to => 'api_keys#update'
   delete 'apps/:id',                                                     :to => 'api_keys#destroy'
 
-  get    'analytics',                                                    :to => 'analytics#index'
-  get    'analytics-api/views_by_period',                                :to => 'analytics#pageviews_over_time'
-  get    'analytics-api/views_by_country',                               :to => 'analytics#pageviews_by_country'
-
-  get    'authentication/initiate',                                      :to => 'se_auth#initiate'
-  post   'authentication/redirect',                                      :to => 'se_auth#redirect'
-  get    'authentication/target',                                        :to => 'se_auth#target'
-  get    'authentication/complete',                                      :to => 'se_auth#already_done'
-
   get    'api/posts/by_url',                                             :to => 'api#posts_by_url'
 end

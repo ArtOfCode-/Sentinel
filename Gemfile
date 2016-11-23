@@ -33,10 +33,6 @@ gem 'devise'
 gem 'rolify'
 gem 'will_paginate-bootstrap'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'ahoy_matey'
-#gem 'activeuuid', '>= 0.5.0'
-gem 'groupdate'
-gem 'chartkick'
 
 gem 'whenever', :require => false
 gem 'httparty'
