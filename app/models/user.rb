@@ -19,8 +19,9 @@ class User < ApplicationRecord
     }
     response = HTTParty.post('https://stackexchange.com/oauth/access_token', :body => parameters)
     if response.code == 200
-      response.parsed_response['access_token']
+      response.parsed_response.split('=')[1]
     else
+      logger.error "Access token request returned status #{response.code}: #{response.body}"
       false
     end
   end
