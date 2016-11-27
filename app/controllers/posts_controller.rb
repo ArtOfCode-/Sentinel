@@ -31,7 +31,8 @@ class PostsController < ApplicationController
         render :json => { :status => "E:POST_FAILED_TO_SAVE", :code => "500.3" }, :status => 500
       end
     else
-      render :json => { :status => "E:POST_FAILED_TO_SAVE", :code => "500.1" }, :status => 500
+      messages = @post.errors.full_messages
+      render :json => { :status => "E:POST_FAILED_TO_SAVE", :code => "500.1", :messages => messages }, :status => 500
     end
   end
 
