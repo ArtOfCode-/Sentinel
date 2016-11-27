@@ -3,8 +3,6 @@ class Post < ApplicationRecord
   has_many :feedbacks, dependent: :destroy
   has_many :deletion_logs, dependent: :destroy
 
-  before_save :check_answer_id
-
   validates :title, :presence => true
   validates :body, :presence => true
   validates :link, :presence => true, :uniqueness => true
@@ -13,7 +11,7 @@ class Post < ApplicationRecord
   validates :username, :presence => true
   validates :user_reputation, :presence => true
   validates :nato_score, :presence => true, :inclusion => -30..30   # -30..30 as a sanity check rather than a validation
-  validates :answer_id, :presence => true
+  validate  :answer_id_exists
 
   def majority_feedback
     Rails.cache.fetch "post_#{self.id}_majority_feedback", :expires_in => 1.hour do
@@ -23,9 +21,9 @@ class Post < ApplicationRecord
   end
 
   private
-  def check_answer_id
-    if self.answer_id.nil? && self.link.present?
-      self.answer_id = self.link.split('/')[-1].to_i
+  def answer_id_exists
+    unless self.answer_id.present?
+      errors.add(:answer_id, "must be present")
     end
   end
 end
