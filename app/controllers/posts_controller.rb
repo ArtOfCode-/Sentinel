@@ -96,7 +96,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :link, :post_creation_date, :user_link, :username, :user_reputation, :nato_score)
+    params.require(:post).permit(:title, :body, :link, :post_creation_date, :user_link, :username, :user_reputation, :nato_score, :answer_id)
   end
 
   def check_can_flag
