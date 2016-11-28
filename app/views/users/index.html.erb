@@ -16,7 +16,13 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.id %></td>
-        <td><%= user.username %></td>
+        <td>
+          <% if user_signed_in? && current_user.has_role?(:admin) %>
+            <%= link_to user.username, url_for(:controller => :users, :action => :show, :id => user.id) %>
+          <% else %>
+            <%= user.username %>
+          <% end %>
+        </td>
         <td><%= time_ago_in_words(user.created_at) %> ago</td>
         <td><%= user.has_role?(:admin) ? "Admin" : "Regular" %></td>
         <% if user_signed_in? && current_user.has_role?(:admin) %>

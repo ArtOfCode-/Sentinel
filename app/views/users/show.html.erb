@@ -1,7 +1,7 @@
 <h3><%= @user.username %> (ID <%= @user.id %>)</h3>
 <p>
   <strong>Registered: </strong><%= time_ago_in_words(@user.created_at) %> ago<br/>
-  <strong>Roles: </strong><%= @user.roles.map{|r| r.downcase!}.to_sentence %><br/>
+  <strong>Roles: </strong><%= @user.roles.pluck(:name).to_sentence %><br/>
   <strong>SE Auth: </strong><%= @user.stack_user.present? ? @user.stack_user.network_id : "No" %> &mdash;
     <%= link_to "deauthorize", url_for(:controller => :se_auth, :action => :deauth, :user_id => @user.id), :method => :post,
                 :data => { :confirm => "Sure? You should only use this if you know what you're doing." }, :class => "text-danger" %>
