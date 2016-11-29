@@ -16,6 +16,7 @@ class FeedbacksController < ApplicationController
   end
 
   def post
+    @users = StackUser.all.where(:chat_so_id => @post.feedbacks.pluck(:chat_id))
   end
 
   private
