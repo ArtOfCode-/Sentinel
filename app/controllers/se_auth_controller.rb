@@ -1,6 +1,6 @@
 class SeAuthController < ApplicationController
   before_action :authenticate_user!
-  before_action :verify_no_auth, :except => [:already_done]
+  before_action :verify_no_auth, :except => [:already_done, :deauth]
   before_action :verify_admin, :only => [:deauth]
 
   def initiate
