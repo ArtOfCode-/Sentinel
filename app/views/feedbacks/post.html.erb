@@ -29,3 +29,27 @@
     <% end %>
   </tbody>
 </table>
+
+<h3>Flags</h3>
+<p>Flags that have been cast via Sentinel.</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Owner</th>
+      <th>Type</th>
+      <th>Flagged</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @post.flags.each do |flag| %>
+      <tr>
+        <td><%= flag.id %></td>
+        <td><%= link_to flag.user.username, "http://chat.stackoverflow.com/users/#{flag.user.stack_user.chat_so_id}" %></td>
+        <td><%= flag.flag_type %></td>
+        <td><%= time_ago_in_words flag.created_at %> ago</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
