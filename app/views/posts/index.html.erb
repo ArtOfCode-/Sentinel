@@ -1,4 +1,7 @@
 <h3>Reported Posts</h3>
+
+<%= line_chart url_for(:controller => :graphs, :action => :posts_by_hour) %>
+
 <p>Ordered by <%= params[:sort] || 'created_at desc' %></p>
 
 <%= form_tag url_for(:controller => :posts, :action => :index), :method => :get do %>

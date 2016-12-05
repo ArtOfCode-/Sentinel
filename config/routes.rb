@@ -49,5 +49,8 @@ Rails.application.routes.draw do
   get    'authentication/target',                                        :to => 'se_auth#target'
   get    'authentication/complete',                                      :to => 'se_auth#already_done'
 
+  get    'graphs/posts_by_hour',                                         :to => 'graphs#posts_by_hour'
+  get    'graphs/reason_feedback_types/:id',                             :to => 'graphs#reason_feedback_types'
+
   get    'api/posts/by_url',                                             :to => 'api#posts_by_url'
 end

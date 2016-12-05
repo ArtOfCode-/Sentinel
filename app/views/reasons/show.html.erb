@@ -1,4 +1,7 @@
 <h3><%= @reason.name %></h3>
+
+<%= pie_chart url_for(:controller => :graphs, :action => :reason_feedback_types, :id => @reason.id) %>
+
 <p><%= pluralize(@reason.posts.count, "post") %> caught, most recent <%= time_ago_in_words(@reason.most_recent.created_at) %> ago</p>
 <ul>
   <% @feedback_counts.each do |fc| %>
