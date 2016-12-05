@@ -1,6 +1,6 @@
 class GraphsController < ApplicationController
   def posts_by_hour
-    render json: Post.group_by_hour(:created_at).count
+    render json: Post.where('created_at > ?', 1.month.ago).group_by_hour(:created_at).count
   end
 
   def reason_feedback_types
