@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get    'posts/:id/edit',                                               :to => 'posts#edit'
   patch  'posts/:id/edit',                                               :to => 'posts#update'
   delete 'posts/:id',                                                    :to => 'posts#destroy'
+  get    'posts/aid/:id',                                                :to => 'posts#by_answer_id'
   get    'posts/:id/feedback',                                           :to => 'feedbacks#post'
   get    'posts/:answer_id/flag_options',                                :to => 'posts#flag_options'
   post   'posts/:answer_id/flag',                                        :to => 'posts#cast_flag'

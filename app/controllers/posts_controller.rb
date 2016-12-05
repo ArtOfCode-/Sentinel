@@ -59,6 +59,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def by_answer_id
+    @post = Post.where(:answer_id => params[:id])
+    if @post.present?
+      redirect_to url_for(:controller => :posts, :action => :show, :id => @post.id)
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def with_feedback
     @type = FeedbackType.find_by_short_code params[:type]
     @posts = @type.posts.paginate(:page => params[:page], :per_page => 100)
