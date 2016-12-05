@@ -4,6 +4,6 @@ class GraphsController < ApplicationController
   end
 
   def reason_feedback_types
-    render json: Post.includes(:reasons).includes(:feedbacks).where(:reasons => { :id => params[:id] }).group('feedbacks.feedback_type_id').count.map{|k,v| { (k.nil? ? "None" : FeedbackType.find(k).name) => v }}
+    render json: Post.includes(:reasons).includes(:feedbacks).where(:reasons => { :id => params[:id] }).group('feedbacks.feedback_type_id').count.map{|k,v| [(k.nil? ? "None" : FeedbackType.find(k).name), v]}
   end
 end
