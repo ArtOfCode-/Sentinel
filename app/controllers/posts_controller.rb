@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   end
 
   def by_answer_id
-    @post = Post.where(:answer_id => params[:id])
+    @post = Post.find_by_answer_id(params[:id])
     if @post.present?
       redirect_to url_for(:controller => :posts, :action => :show, :id => @post.id)
     else
