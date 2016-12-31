@@ -1,5 +1,5 @@
 # Sentinel
-Web dashboard for NATOBot (https://github.com/Bhargav-Rao/NATOBot).
+Web dashboard for Natty (https://github.com/Bhargav-Rao/NATOBot).
 
 ### Setup
 Pretty standard Rails setup, really. Built on these versions, may or may not work with
