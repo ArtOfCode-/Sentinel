@@ -11,7 +11,7 @@
 
 <br/>
 
-<%= pie_chart url_for(:controller => :graphs, :action => :search_feedback_types, :ids => @results.map(&:id)) %>
+<%= pie_chart @results.includes(:reasons).includes(:feedbacks).group('feedbacks.feedback_type_id').count.map{|k,v| [(k.nil? ? "None" : FeedbackType.find(k).name), v]} %>
 
 <% @results.each do |post| %>
   <%= render 'posts/post', :post => post %>
