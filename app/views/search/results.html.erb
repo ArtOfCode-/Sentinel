@@ -11,6 +11,8 @@
 
 <br/>
 
+<%= pie_chart url_for(:controller => :graphs, :action => :search_feedback_types, :ids => @results.map(&:id)) %>
+
 <% @results.each do |post| %>
   <%= render 'posts/post', :post => post %>
 <% end %>
