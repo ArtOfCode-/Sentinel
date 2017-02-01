@@ -1,0 +1,13 @@
+<h3>Review</h3>
+
+<% @posts.each do |post| %>
+  <div class="review-post" data-post-id="<%= post.id %>">
+    <div class="actions">
+      <button class="btn btn-success feedback" data-ftype="tp">True Positive</button>
+      <button class="btn btn-danger feedback" data-ftype="fp">False Positive</button>
+      <button class="btn btn-info feedback" data-ftype="ne">Needs Edit</button>
+    </div>
+    <%= render 'posts/post', :post => post %>
+    <pre><code><%= post.body %></code></pre>
+  </div>
+<% end %>
