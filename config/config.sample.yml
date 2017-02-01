@@ -2,6 +2,9 @@ common: &common
   se_api_key: foo
   se_client_id: bar 
   se_client_secret: baz
+  ses_smtp_credentials:
+    username: 'AAAA'
+    password: 'password'
 
 development:
   <<: *common
