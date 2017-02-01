@@ -77,6 +77,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   config.default_url_options = { :host => 'sentinel.erwaysoftware.com', :port => 80 }
+  config.action_mailer.default_url_options = config.default_url_options
 
   config.se_api_key = ENV['SE_API_KEY']
   config.se_client_id = ENV['SE_CLIENT_ID']
