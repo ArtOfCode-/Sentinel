@@ -53,4 +53,5 @@ Rails.application.routes.draw do
   get    'graphs/reason_feedback_types/:id',                             :to => 'graphs#reason_feedback_types'
 
   get    'api/posts/by_url',                                             :to => 'api#posts_by_url'
+  get    'api/reasons/:ids',                                             :to => 'api#reasons_by_id'
 end
