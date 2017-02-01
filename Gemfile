@@ -40,6 +40,8 @@ gem 'httparty'
 gem 'groupdate', "~> 3.0.0"
 gem 'chartkick'
 
+gem "awesome_print"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
