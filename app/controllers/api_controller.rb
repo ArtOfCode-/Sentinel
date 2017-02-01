@@ -16,7 +16,7 @@ class ApiController < ApplicationController
     @results = Reason.where(:id => params[:ids].split(";"))
     @count = @results.count
     @results = @results.order(:id => :desc).paginate(:page => params[:page], :per_page => @pagesize)
-    @feedback_counts = Post.joins(:reasons).joins(:feedbacks).where(:reasons => { :id => reason.id }).group('feedbacks.feedback_type_id').count.map{ |k,v| [(k.nil? ? "None" : FeedbackType.find(k).short_code), v]}
+    @feedback_counts = Post.joins(:reasons).joins(:feedbacks).where(:reasons => { :id => reason.id }).group('feedbacks.feedback_type_id').count.map{ |k,v| [(k.nil? ? "None" : FeedbackType.find(k).short_code), v]}.to_h
     render :reasons_by_id, :formats => :json
   end
 
