@@ -20,6 +20,12 @@ class ApiController < ApplicationController
     render :reasons_by_id, :formats => :json
   end
 
+  def blacklist_stats
+    @reasons = Reason.where('name LIKE \'Contains Blacklisted Word - %\'')
+    @feedback_stats = Reason.where(:id => @reasons.map(&:id)).map{ |r| [r.id, Post.joins(:reasons).joins(:feedbacks).where(:reasons => { :id => r.id }).group('feedbacks.feedback_type_id').count.map{ |k,v| [(k.nil? ? "None" : FeedbackType.find(k).short_code), v]}.to_h]}.to_h
+    render :blacklist_stats, :formats => :json
+  end
+
   # Operational methods
 
   def has_more(result_count, per_page, page)

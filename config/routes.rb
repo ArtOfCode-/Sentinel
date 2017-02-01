@@ -54,4 +54,5 @@ Rails.application.routes.draw do
 
   get    'api/posts/by_url',                                             :to => 'api#posts_by_url'
   get    'api/reasons/:ids',                                             :to => 'api#reasons_by_id'
+  get    'api/blacklist_stats',                                          :to => 'api#blacklist_stats'
 end
