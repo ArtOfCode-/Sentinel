@@ -57,6 +57,8 @@ class ApiKeysController < ApplicationController
   end
 
   def verify_access
-    current_user.has_role?(:admin) || current_user == @key.user
+    unless current_user.has_role?(:admin) || current_user == @key.user
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 end
