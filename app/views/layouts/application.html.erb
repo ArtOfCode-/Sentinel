@@ -59,7 +59,9 @@
             <li><%= link_to "sign in", new_user_session_path %></li>
             <li><%= link_to "sign up", new_user_registration_path %></li>
         <% end %>
-        <li><code><%= link_to current_version, "https://github.com/ArtOfCode-/Sentinel" %></code></li>
+        <li><%= link_to "https://github.com/ArtOfCode-/Sentinel" do %>
+          <code><%= current_version %></code>
+        <% end %></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
