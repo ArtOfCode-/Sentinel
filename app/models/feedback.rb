@@ -7,6 +7,6 @@ class Feedback < ApplicationRecord
 
   after_create do
     Rails.cache.delete("post_#{self.post.id}_majority_feedback")
-    Feedback.where(:chat_id => self.chat_id, :post_id => self.post_id).where.not(:id => @feedback.id).destroy_all
+    Feedback.where(:chat_id => self.chat_id, :post_id => self.post_id).where.not(:id => self.id).destroy_all
   end
 end
