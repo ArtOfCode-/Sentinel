@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
     $(".feedback").on("click", function() {
         var $post = $(this).parent().parent();
         var feedbackType = $(this).data("ftype");
