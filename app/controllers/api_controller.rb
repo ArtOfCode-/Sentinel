@@ -9,6 +9,14 @@ class ApiController < ApplicationController
     @results = Post.where(:link => params[:url])
     @count = @results.count
     @results = @results.order(:id => :desc).paginate(:page => params[:page], :per_page => @pagesize)
+    @feedback_counts = {}
+    FeedbackType.joins(:feedbacks).where(:feedbacks => { :post_id => @results.map(&:id) }).group('feedbacks.post_id').group('feedback_types.short_code').count.map do |g, v|
+      if @feedback_counts[g[0]].present?
+        @feedback_counts[g[0]][g[1]] = v
+      else
+        @feedback_counts[g[0]] = { g[1] => v }
+      end
+    end
     render :posts_by_url, :formats => :json
   end
 
