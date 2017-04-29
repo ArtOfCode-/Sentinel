@@ -1,4 +1,4 @@
-json.array! @results do |post|
+json.items @results.each do |post|
   json.merge! post.as_json
   json.merge!({
     :feedback_counts => @feedback_counts[post.id]
