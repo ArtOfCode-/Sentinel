@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_many :feedbacks, dependent: :destroy
   has_many :deletion_logs, dependent: :destroy
   has_many :flags, dependent: :destroy
+  belongs_to :site
 
   validates :title, :presence => true
   validates :body, :presence => true

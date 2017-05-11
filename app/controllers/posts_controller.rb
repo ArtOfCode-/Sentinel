@@ -11,7 +11,9 @@ class PostsController < ApplicationController
   end
 
   def create
+    site = Site.find_by_url params[:site]
     @post = Post.new post_params
+    @post.site = site
     if @post.save
       params[:reasons].each do |reason|
         @reason = Reason.find_or_create_by(name: reason)
