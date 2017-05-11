@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201212836) do
+ActiveRecord::Schema.define(version: 20170511115115) do
 
   create_table "ahoy_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "visit_id"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20170201212836) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "answer_id"
+    t.integer  "site_id"
+    t.index ["site_id"], name: "index_posts_on_site_id", using: :btree
   end
 
   create_table "posts_reasons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -111,6 +113,16 @@ ActiveRecord::Schema.define(version: 20170201212836) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
+  end
+
+  create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "logo"
+    t.string   "domain"
+    t.boolean  "is_child_meta"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "stack_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -182,4 +194,5 @@ ActiveRecord::Schema.define(version: 20170201212836) do
     t.index ["visit_token"], name: "index_visits_on_visit_token", unique: true, using: :btree
   end
 
+  add_foreign_key "posts", "sites"
 end
