@@ -7,18 +7,9 @@ class SearchController < ApplicationController
                .or(Post.where('body LIKE ?', "%#{search_term}%"))
                .or(Post.where('username LIKE ?', "%#{search_term}%"))
 
-    case params[:feedback]
-    when "true positive"
-      feedback = 1
-    when "false positive"
-      feedback = 2
-    when "true negative"
-      feedback = 3
-    when "needs edit"
-      feedback = 4
-    end
-
-    if feedback.present?
+    feedback = params[:feedback]
+    if feedback.present? && feedback != "-1" # -1 signifies no specific feedback is selected.
+      feedback.to_i
       @results = @results.joins(:feedbacks).where(:feedbacks => {:feedback_type_id => feedback})
     end
   
