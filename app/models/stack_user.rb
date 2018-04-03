@@ -10,7 +10,7 @@ class StackUser < ApplicationRecord
       self.username = user_json['items'][0]['display_name']
 
       # Haaaaaaaaack.
-      self.chat_so_id = Net::HTTP.get_response(URI.parse("http://chat.stackoverflow.com/accounts/#{self.network_id}"))["location"].scan(/\/users\/(\d*)\//)[0][0]
+      self.chat_so_id = Net::HTTP.get_response(URI.parse("https://chat.stackoverflow.com/accounts/#{self.network_id}"))["location"].scan(/\/users\/(\d*)\//)[0][0]
 
       self.save
     else
