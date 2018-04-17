@@ -7,10 +7,8 @@ class SearchController < ApplicationController
                .or(Post.where('body LIKE ?', "%#{search_term}%"))
                .or(Post.where('username LIKE ?', "%#{search_term}%"))
 
-    feedback = params[:feedback]
-    if feedback.present? && feedback != "-1" # -1 signifies no specific feedback is selected.
-      feedback.to_i
-      @results = @results.joins(:feedbacks).where(:feedbacks => {:feedback_type_id => feedback})
+    if params[:feedback].present?
+      @results = @results.joins(:feedbacks).where(:feedbacks => {:feedback_type_id => params[:feedback]})
     end
   
     min_score = params[:min_score].to_i || -30

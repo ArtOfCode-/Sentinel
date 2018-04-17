@@ -10,7 +10,7 @@
   <br/>
   Feedback type
   <div class="field input-group">
-    <%= select_tag 'feedback', options_for_select([["Any", ""], ["true positive", 1], ["false positive", 2], ["true negative", 3], ["needs edit", 4]], params[:feedback]), :class => "form-control" %>
+    <%= select_tag 'feedback', options_from_collection_for_select(FeedbackType.all, 'id', 'short_code'), :include_blank => true, :class => "form-control" %>
     <span class="input-group-btn">
       <%= submit_tag 'Search', :class => "btn btn-success" %>
     </span>
