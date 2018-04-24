@@ -32,7 +32,7 @@ $(document).ready(function() {
                             }
                         }
                     });
-                    flagOption.prependTo(dialog);
+                    flagOption.appendTo(dialog);
                 }
             }
             $(".modal").first().modal('show');
