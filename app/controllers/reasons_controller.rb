@@ -9,7 +9,7 @@ class ReasonsController < ApplicationController
 
   def show
     @posts = @reason.posts.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 100)
-    @feedback_counts = FeedbackType.all.map{|ft| [ft.short_code, ft.posts.joins(:posts_reasons).where(:posts_reasons => { :reason_id => @reason.id }).count] }
+    @feedback_counts = FeedbackType.all.map{|ft| [ft.short_code, ft.posts.joins(:posts_reasons).where(:posts_reasons => { :reason_id => @reason.id }).distinct.count(:id)] }
   end
 
   def edit
