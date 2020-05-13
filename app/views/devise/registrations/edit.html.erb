@@ -38,6 +38,16 @@
       </div>
     </div>
 
+    <% if current_user.stack_user.present? %>
+      <div class="panel panel-danger">
+        <div class="panel-body">
+          <h3>Deauthorize Stack Exchange</h3>
+          <p>No longer want your Sentinel account linked with Stack Exchange? Click the button below.
+            <%= button_to "Deauthorize", "/users/#{current_user.id}/deauth", data: { confirm: "Are you sure?" }, method: :post, class: 'btn btn-danger' %></p>
+        </div>
+      </div>
+    <% end %>
+
     <div class="panel panel-danger">
       <div class="panel-body">
         <h3>Cancel my account</h3>
