@@ -11,7 +11,8 @@ class StackUser < ApplicationRecord
 
       # Haaaaaaaaack.
       self.chat_so_id = Net::HTTP.get_response(URI.parse("https://chat.stackoverflow.com/accounts/#{self.network_id}"))["location"].scan(/\/users\/(\d*)\//)[0][0]
-
+      self.chat_se_id = Net::HTTP.get_response(URI.parse("https://chat.stackexchange.com/accounts/#{self.network_id}"))["location"].scan(/\/users\/(\d*)\//)[0][0]
+      
       self.save
     else
       logger.error "/me request returned status #{api_response.code}: #{api_response.body}"
