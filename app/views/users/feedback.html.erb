@@ -1,5 +1,5 @@
 <h3>User feedback for <%= @user.username %></h3>
-<span><strong><%= @posts.count %></strong> feedbacks, <%= @posts.where('feedbacks.created_at > ?', Date.today).count %> today</span>
+<span><strong><%= @feedbacks.count %></strong> feedbacks, <%= @feedbacks.where('feedbacks.created_at > ?', Date.today).count %> today</span>
 
 <table class="table table-striped">
   <thead>
@@ -10,16 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @posts.each do |post| %>
+    <% @feedbacks.each do |feedback| %>
       <tr>
-        <td><%= link_to post.title, url_for(:controller => :posts, :action => :show, :id => post.id) %></td>
-        <td style="color: <%= post.color %>"><%= post.short_code %></td>
-        <td><%= time_ago_in_words(post.created_at) %> ago</td>
+        <td><%= link_to feedback.title, url_for(:controller => :posts, :action => :show, :id => feedback.id) %></td>
+        <td style="color: <%= feedback.color %>"><%= feedback.short_code %></td>
+        <td><%= time_ago_in_words(feedback.created_at) %> ago</td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <div class="text-center">
-  <%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
+  <%= will_paginate @feedbacks, :renderer => BootstrapPagination::Rails %>
 </div>
