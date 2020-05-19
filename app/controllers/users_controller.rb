@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     redirect_to url_for(:controller => :users, :action => :index)
   end
 
+  def feedback
+    @feedbacks = Feedback.joins(:post, :feedback_type).select('`posts`.`id`, `posts`.`title`, `feedbacks`.`created_at`,	`feedback_types`.`short_code`, `feedback_types`.`color`')
+                 .where(:feedbacks => { :chat_username => @user.username }).order(Arel.sql('`feedbacks`.`created_at` DESC')).paginate(:page => params[:page], :per_page => 100)
+  end
+
   def show
   end
 

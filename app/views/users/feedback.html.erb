@@ -1,0 +1,25 @@
+<h3>User feedback for <%= @user.username %></h3>
+<span><strong><%= @feedbacks.count %></strong> feedbacks, <%= @feedbacks.where('feedbacks.created_at > ?', Date.today).count %> today</span>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Post</th>
+      <th>Feedback type</th>
+      <th>Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <td><%= link_to feedback.title, url_for(:controller => :posts, :action => :show, :id => feedback.id) %></td>
+        <td style="color: <%= feedback.color %>"><%= feedback.short_code %></td>
+        <td><%= time_ago_in_words(feedback.created_at) %> ago</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= will_paginate @feedbacks, :renderer => BootstrapPagination::Rails %>
+</div>
