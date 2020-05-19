@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511115115) do
+ActiveRecord::Schema.define(version: 20200519083132) do
 
   create_table "ahoy_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "visit_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20170511115115) do
     t.string   "chat_username"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["chat_username"], name: "index_feedbacks_on_chat_username"
     t.index ["feedback_type_id"], name: "index_feedbacks_on_feedback_type_id", using: :btree
     t.index ["post_id"], name: "index_feedbacks_on_post_id", using: :btree
   end

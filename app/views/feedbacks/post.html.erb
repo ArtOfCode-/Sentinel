@@ -15,10 +15,11 @@
       <tr>
         <td><%= feedback.id %></td>
         <td>
-          <%= link_to feedback.chat_username, "http://chat.stackoverflow.com/users/#{feedback.chat_id}" %>
-          <% user = @users.where(:chat_so_id => feedback.chat_id) %>
-          <% if @user.present? %>
-            (<%= @user.user.username %>)
+          <% link = "https://chat.#{@users.where(:chat_so_id => feedback.chat_id).present? ? "stackoverflow" : "stackexchange"}.com/users/#{feedback.chat_id}"%>
+          <%= link_to feedback.chat_username, link %>
+          <% user = @users.where(:chat_so_id => feedback.chat_id).or(@users.where(:chat_se_id => feedback.chat_id)) %>
+          <% if user.present? %>
+            (<%= user.first.username %>)
           <% end %>
         </td>
         <td style="color:<%= feedback.feedback_type.color %> !important;">
