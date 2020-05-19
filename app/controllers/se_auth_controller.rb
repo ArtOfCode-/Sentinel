@@ -1,7 +1,6 @@
 class SeAuthController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_no_auth, :except => [:already_done, :deauth]
-  before_action :verify_admin, :only => [:deauth]
 
   def initiate
   end
@@ -46,12 +45,14 @@ class SeAuthController < ApplicationController
 
   def deauth
     @user = User.find params[:user_id]
-    if @user.stack_user.destroy
-      flash[:success] = "Removed SE auth details successfully."
-    else
-      flash[:danger] = "Failed to remove SE auth details."
+    if current_user.id == params[:user_id] || current_user.has_role?(:admin)
+      if @user.stack_user.destroy
+        flash[:success] = "Removed SE auth details successfully."
+      else
+        flash[:danger] = "Failed to remove SE auth details."
+      end
+      redirect_back(fallback_location: root_path)
     end
-    redirect_to url_for(:controller => :users, :action => :show, :id => @user.id)
   end
 
   private
