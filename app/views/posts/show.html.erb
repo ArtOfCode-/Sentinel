@@ -32,7 +32,7 @@
   <br/>
 <% end %>
 
-<p><strong>Caught by <%= pluralize(@post.reasons_count, "reason") %>:</strong></p>
+<p><strong>Caught by <%= pluralize(@post.reasons.count, "reason") %>:</strong></p>
 <ul class="post-reasons">
   <% @post.reasons.each do |reason| %>
     <li><%= link_to reason.name, url_for(:controller => :reasons, :action => :show, :id => reason.id) %></li>

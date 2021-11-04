@@ -4,7 +4,7 @@ class ReasonsController < ApplicationController
   before_action :verify_admin, :only => [:edit, :update, :destroy]
 
   def index
-    @reasons = Reason.order('posts_count desc').paginate(:page => params[:page], :per_page => 50)
+    @reasons = Reason.all.left_joins(:posts).group('reasons.id').order('count(posts.id) desc').paginate(:page => params[:page], :per_page => 50)
   end
 
   def show

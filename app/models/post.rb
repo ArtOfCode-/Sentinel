@@ -1,7 +1,5 @@
 class Post < ApplicationRecord
-  has_many :posts_reasons
-  has_many :reasons, through: :posts_reasons
-
+  has_and_belongs_to_many :reasons
   has_many :feedbacks, dependent: :destroy
   has_many :deletion_logs, dependent: :destroy
   has_many :flags, dependent: :destroy
