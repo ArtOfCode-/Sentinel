@@ -1,5 +1,5 @@
 class Feedback < ApplicationRecord
-  belongs_to :post
+  belongs_to :post, counter_cache: :feedbacks_count
   belongs_to :feedback_type
 
   validates :feedback_type, :presence => true

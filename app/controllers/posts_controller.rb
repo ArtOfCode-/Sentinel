@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:create]
 
   def index
-    @posts = Post.all.order(params[:sort] || 'created_at desc', 'id desc').paginate(:page => params[:page], :per_page => 100)
+    @posts = Post.all.order(params[:sort] || 'created_at desc', 'id desc').includes(feedbacks: :feedback_type).includes(:site).paginate(:page => params[:page], :per_page => 100)
   end
 
   def create
