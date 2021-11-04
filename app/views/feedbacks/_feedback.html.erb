@@ -1,8 +1,8 @@
 <span class="feedback" style="color:<%= type.color %>;" title="<%= type.name %> (<%= type.short_code %>)">
   <%= type.character %>
   <%= link_to url_for(:controller => :feedbacks, :action => :post, :id => post.id) do %>
-    <span class="badge" title="<%= pluralize(post.feedbacks.count, "feedback") %>">
-      <%= post.feedbacks.count %>
+    <span class="badge" title="<%= pluralize(post.feedbacks_count, "feedback") %>">
+      <%= post.feedbacks_count %>
     </span>
   <% end %>
 </span>
