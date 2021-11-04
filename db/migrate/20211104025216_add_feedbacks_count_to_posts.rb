@@ -5,7 +5,12 @@ class AddFeedbacksCountToPosts < ActiveRecord::Migration[6.1]
     reversible do |dir|
       dir.up do
         ActiveRecord::Base.connection.execute <<-SQL.squish
-UPDATE posts SET feedbacks_count = (SELECT count(1) FROM feedbacks f WHERE f.post_id = posts.id);
+update posts p
+inner join (
+select post_id, COUNT(id) as count
+from feedbacks
+group by post_id) x on x.post_id = p.id
+set p.feedbacks_count = count;
         SQL
       end
     end

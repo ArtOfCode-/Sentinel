@@ -6,11 +6,21 @@ class AddCounterCachesToPostsAndReasons < ActiveRecord::Migration[6.1]
     reversible do |dir|
       dir.up do
         ActiveRecord::Base.connection.execute <<-SQL.squish
-UPDATE posts SET reasons_count = (SELECT count(1) FROM reasons r INNER JOIN posts_reasons pr on pr.reason_id = r.id WHERE pr.post_id = posts.id);
+update reasons r
+inner join (
+select reason_id, COUNT(post_id) as count
+from posts_reasons
+group by reason_id) x on x.reason_id = r.id
+set r.posts_count = count;
         SQL
 
         ActiveRecord::Base.connection.execute <<-SQL.squish
-UPDATE reasons SET posts_count = (select COUNT(1) FROM posts p INNER JOIN posts_reasons pr on pr.post_id = p.id WHERE pr.reason_id = reasons.id);
+update posts p
+inner join (
+select post_id, COUNT(reason_id) as count
+from posts_reasons
+group by post_id) x on x.post_id = p.id
+set p.reasons_count = count;
         SQL
       end
     end
